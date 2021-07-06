@@ -8,6 +8,11 @@ class TvControl {
         hTv.setCurrent_channel(11);
         System.out.println(hTv.getCurrent_channel());
         System.out.println(hTv.resolution);
+
+
+        System.out.println(hTv.add(10));
+
+
 // Tv 켜기
 // 볼륨 키우기
 // 채널 바꾸기
@@ -43,13 +48,35 @@ public class Tv {
         }
     }
 
+    public int[] getChannel() {
+        return channel;
+    }
+
+    public void setChannel(int[] channel) {
+        this.channel = channel;
+    }
+
     // Getter Setter
     public int getCurrent_channel() {
         return current_channel;
     }
 
     public void setCurrent_channel(int current_channel) {
-        this.current_channel = current_channel;
+        if (current_channel > 100){
+            System.out.println("입력오류 : 없는 채널입니다.");
+        }else {
+            this.current_channel  = current_channel;
+        }
     }
+
+    public int add(int num){
+        int result = num + 10;
+        return  result;
+    }
+    class Speaker {
+        int dolby;
+
+    }
+
 }
 // 기능
