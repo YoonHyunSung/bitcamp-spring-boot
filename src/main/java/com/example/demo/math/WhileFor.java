@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.test;
 
 public class WhileFor {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.bank;
 
 class BankAccount{
     int balance = 0; //예금잔액

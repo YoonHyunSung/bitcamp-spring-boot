@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.test;
 
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
