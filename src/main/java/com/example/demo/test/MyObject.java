@@ -1,6 +1,4 @@
-package com.example.demo.test;
-
-import com.sun.org.apache.bcel.internal.generic.NEW;
+package com.example.demo.math;
 
 import java.util.Scanner;
 
