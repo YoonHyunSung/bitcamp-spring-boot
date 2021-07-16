@@ -1,2 +1,5 @@
-package com.example.demo.util.service;public class UtilServieImplTest {
+package com.example.demo.util.service;
+import com.example.demo.util.service.LambdaUtils;
+public class UtilServieImplTest extends LambdaUtils{
+
 }

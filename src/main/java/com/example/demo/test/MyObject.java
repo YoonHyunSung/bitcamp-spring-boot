@@ -1,4 +1,4 @@
-package com.example.demo.math;
+package com.example.demo.test;
 
 import java.util.Scanner;
 

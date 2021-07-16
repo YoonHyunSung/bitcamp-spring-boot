@@ -1,80 +1,107 @@
 package com.example.demo.bank.service;
 
-import com.example.demo.bank.domain.BankAccountDTO;
+import com.example.demo.bank.domain.BankDTO;
 import com.example.demo.util.service.LambdaUtils;
 import com.example.demo.util.service.UtilService;
 import com.example.demo.util.service.UtilServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
 
-public class BankAcoountServiceImpl extends LambdaUtils implements BankAcoountService {
-    private final BankAccountDTO bankAccount;//finalize
-    private final List<BankAccountDTO> bankAccounts;
-    public BankAcoountServiceImpl() {//Constructor로 Instance생성.
-        bankAccount = new BankAccountDTO();
-        bankAccounts = new ArrayList<>();
+public class BankServiceImpl extends LambdaUtils implements BankService {
+    private final BankDTO bank;//finalize
+    private final List<BankDTO> banks;
+    public BankServiceImpl() {//Constructor로 Instance생성.
+        bank = new BankDTO();
+        banks = new ArrayList<>();
     }
 
     @Override
-    public void add(BankAccountDTO bankAccount) {
-        bankAccounts.add(bankAccount);
+    public void add(BankDTO bank) {
+        banks.add(bank);
     }
 
     @Override
     public String count() {
-        return string.apply(bankAccounts.size());
+        return string.apply(banks.size());
     }
 
     @Override
     public List<?> findAll() {
-        return bankAccounts;
+        return banks;
     }
 
     @Override
     public String[] findAllAccountNumber() {//계좌번호목록
+        BankDTO bank = new BankDTO();
         int count = strToInt.apply(count());
         String[] findAllAccountNumber = new String[count];
         for (int i =0; i<count; i++) {
-            findAllAccountNumber[i] = bankAccounts.get(i).getAccountNumber();
+            findAllAccountNumber[i] = banks.get(i).getAccountNumber();
         }
         return findAllAccountNumber;
     }
 
-    public void creationAccount(BankAccountDTO bankAccount) {//계좌생성
-        //this.bankAccount = new BankAccountDTO();
+    public void creationAccount(BankDTO bank) {//계좌생성
         UtilService utilService = new UtilServiceImpl();
         String accountNumber = utilService.randomNumbers(3,false)+"-"+
                 utilService.randomNumbers(3,true)+"-"+
                 utilService.randomNumbers(3,true);
-        bankAccount.setAccountNumber(accountNumber);
-        bankAccounts.add(bankAccount);
+        bank.setAccountNumber(accountNumber);
+        bank.setInterest("0.01");
+        bank.setDate(utilService.todayAndCurrentTiome());
+        banks.add(bank);
     }
 
     @Override
-    public String balancecheck(BankAccountDTO bankAccount) {//잔액조회
-        System.out.println(bankAccount.getBalance());
-        return bankAccount.getBalance();
+    public String balancecheck(BankDTO bank) {//잔액조회
+        System.out.println(bank.getBalance());
+        return bank.getBalance();
     }
 
     @Override
-    public String deposit(BankAccountDTO bankAccount) {//입금
-        int restMoney = strToInt.apply(bankAccount.getMoney());
-        bankAccount.setBalance(restMoney+bankAccount.getMoney());
-        return this.bankAccount.getBalance();
+    public void deposit(BankDTO param) {
+        for (BankDTO a : banks){
+            if (param.getAccountNumber().equals(a.getAccountNumber())){
+                int balance = strToInt.apply(param.getBalance());
+                a.setBalance(string.apply(balance+strToInt.apply(param.getMoney())));
+            break;
+            }
+
+        }
     }
 
-    @Override
-    public String withdraw(BankAccountDTO bankAccount) {//출금
-        int restMoney = strToInt.apply(bankAccount.getMoney());
-        return "";
-    }
 
     @Override
-    public void accountcancellation(BankAccountDTO bankAccount) {
+    public void withdraw(BankDTO bank) {
+        for (BankDTO a : banks){
+            if (bank.getAccountNumber().equals(a.getAccountNumber())){
+                int balance = strToInt.apply(a.getBalance());
+                a.setBalance(string.apply(balance-strToInt.apply(bank.getMoney())));
+                print.accept(""+a);
+                break;
+            }
+        }
+    }
+
+    /*
+        @Override
+        public String deposit(BankDTO bank) {//입금
+            int restMoney = strToInt.apply(bank.getMoney());
+            bank.setBalance(restMoney+bank.getMoney());
+            print.accept("계좌번호입력:");
+
+
+            return this.bank.getBalance();
+        }
+        @Override
+        public String withdraw(BankDTO bank) {//출금
+            int restMoney = strToInt.apply(bank.getMoney());
+            return "";
+        }
+    */
+    @Override
+    public void accountcancellation(BankDTO bankAccount) {
 
     }
 }

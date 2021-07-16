@@ -1,2 +1,4 @@
-package com.example.demo.common;public class domain {
+package com.example.demo.common.domain;
+
+public class Domain {
 }

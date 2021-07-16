@@ -1,44 +1,44 @@
 package com.example.demo.math.service;
 
 
-import com.example.demo.math.domain.CalculatorDTO;
+import com.example.demo.math.domain.MathDTO;
 
-public class CalculatorServiceImpl implements CalculatorService {
-    private CalculatorDTO calculator;
-    public CalculatorServiceImpl(){
-        calculator = new CalculatorDTO();
-    }
+public class MathServiceImpl implements MathService {
     @Override
-    public int add(CalculatorDTO calculator) {
-        return calculator.getNum1() + calculator.getNum2();
+    public int add(MathDTO math) {
+        return math.getNum1() + math.getNum2();
     }
 
     @Override
-    public int subtract(CalculatorDTO calculator) {
-        return calculator.getNum1() - calculator.getNum2();
+    public int subtract(MathDTO math) {
+        math.setResult( math.getNum1() - math.getNum2());
+        return math.getResult();
     }
 
     @Override
-    public int multiple(CalculatorDTO calculator) {
-        return calculator.getNum1() * calculator.getNum2();
+    public int multiple(MathDTO math) {
+        math.setResult(math.getNum1() * math.getNum2());
+        return math.getResult();
     }
 
     @Override
-    public int divide(CalculatorDTO calculator) {
-        return calculator.getNum1() / calculator.getNum2();
+    public int divide(MathDTO math) {
+        math.setResult(math.getNum1() / math.getNum2());
+        return math.getResult();
     }
 
     @Override
-    public int remain(CalculatorDTO calculator) {
-        return calculator.getNum1() % calculator.getNum2();
+    public int remain(MathDTO math) {
+        math.setResult(math.getNum1() % math.getNum2());
+        return math.getResult();
     }
 
     @Override
-    public int[] sequence(CalculatorDTO calculator) {
-        int count = calculator.getNum2() -calculator.getNum1() +1;
+    public int[] sequence(MathDTO math) {
+        int count = math.getNum2() -math.getNum1() +1;
         int[] arr = new int[count];
         int i = 0;
-        for (int j=calculator.getNum1(); j <=calculator.getNum2(); j++) {
+        for (int j=math.getNum1(); j <=math.getNum2(); j++) {
             arr[i] = j;
             i++;
         }

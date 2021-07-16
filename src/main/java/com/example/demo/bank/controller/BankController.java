@@ -1,52 +1,57 @@
 package com.example.demo.bank.controller;
 
-import com.example.demo.bank.domain.BankAccountDTO;
-import com.example.demo.bank.service.BankAcoountService;
-import com.example.demo.bank.service.BankAcoountServiceImpl;
-import com.example.demo.bicycle.controller.BicycleController;
-import com.example.demo.bicycle.service.BicycleServiceImpl;
-import com.example.demo.util.controller.UtilController;
+import com.example.demo.bank.domain.BankDTO;
+import com.example.demo.bank.service.BankServiceImpl;
 import com.example.demo.util.service.LambdaUtils;
 
 import java.util.Scanner;
 
-public class BankAccountController extends LambdaUtils {
-    private BankAcoountServiceImpl bankAcoountService;
+public class BankController extends LambdaUtils {
+    private BankServiceImpl bankService;
+    BankDTO bank;
 
-    public BankAccountController() {
-        bankAcoountService = new BankAcoountServiceImpl();
+    public BankController() {
+        bankService = new BankServiceImpl();
     }
 
     public void main() {
         Scanner scanner = new Scanner(System.in);
-        BankAccountDTO bankAccount = null;
         while (true) {
-            print.accept("Menu 0-Exit 1-계좌생성 2-계좌목록 3-계좌번호목록 4-입금");
+            print.accept("Menu 0-Exit 1-계좌생성 2-계좌목록 3-계좌번호목록 4-입금 5-출금");
             switch (scanner.next()) {
                 case "0":
                     return;
                 case "1":
-                    bankAccount = new BankAccountDTO();
+                    bank =new BankDTO();
                     print.accept("이름 : ");
-                    bankAccount.setName(scanner.next());
+                    bank.setName(scanner.next());
                     print.accept("초기 금액 :");
-                    bankAccount.setBalance(scanner.next());
-                    bankAcoountService.creationAccount(bankAccount);
+                    bank.setBalance(scanner.next());
+                    bankService.creationAccount(bank);
                     break;
                 case "2":
-                    print.accept(string.apply(bankAcoountService.findAll()));
+                    print.accept(string.apply(bankService.findAll()));
                     break;
                 case "3":
-                    for(String s: bankAcoountService.findAllAccountNumber()){
+                    for(String s: bankService.findAllAccountNumber()){
                         print.accept(s + "\n");
                     }
                     break;
                 case "4":
-                    bankAccount = new BankAccountDTO();
+                    bank =new BankDTO();
                     print.accept("계좌번호");
-                    bankAccount.setAccountNumber(scanner.next());
+                    bank.setAccountNumber(scanner.next());
                     print.accept("입금액 : ");
-                    bankAccount.setMoney(scanner.next());
+                    bank.setMoney(scanner.next());
+                    bankService.deposit(bank);
+                    break;
+                case "5":
+                    bank =new BankDTO();
+                    print.accept("계좌번호");
+                    bank.setAccountNumber(scanner.next());
+                    print.accept("출금액 : ");
+                    bank.setMoney(scanner.next());
+                    bankService.withdraw(bank);
                     break;
             }
         }

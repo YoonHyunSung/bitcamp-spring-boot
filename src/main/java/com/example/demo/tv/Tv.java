@@ -1,4 +1,4 @@
-package com.example.demo.test;
+package com.example.demo.tv;
 class TvControl {
     public static void main(String[] args){
         Tv lgTv = new Tv("LG");
